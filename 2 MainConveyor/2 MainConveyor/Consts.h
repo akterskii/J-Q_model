@@ -10,6 +10,7 @@ const int SpinsInPlaquet = 4;
 //in pair case 2 matrixes for Q and J interactions; in quatro case 2 matrixes for 2 terms
 const int OrtsAmount = 3;
 
+const bool DEBUG = true;
 
 const int indexOfInsideJOperator = 2;
 
