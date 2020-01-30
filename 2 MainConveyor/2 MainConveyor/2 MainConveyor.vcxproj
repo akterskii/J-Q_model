@@ -161,6 +161,7 @@
     <ClInclude Include="..\..\SharedFiles\RouteOperator.h" />
     <ClInclude Include="Consts.h" />
     <ClInclude Include="JFactors.h" />
+    <ClInclude Include="main_functions.h" />
     <ClInclude Include="MatrixOfResults.h" />
     <ClInclude Include="MyFunctions.h" />
     <ClInclude Include="Operators.h" />
@@ -184,6 +185,7 @@
     <ClCompile Include="..\..\SharedFiles\RouteOperator.cpp" />
     <ClCompile Include="2 MainConveyor.cpp" />
     <ClCompile Include="JFactors.cpp" />
+    <ClCompile Include="main_functions.cpp" />
     <ClCompile Include="MatrixOfResults.cpp" />
     <ClCompile Include="MyFunctions.cpp" />
     <ClCompile Include="Operators.cpp" />

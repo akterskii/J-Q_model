@@ -32,16 +32,67 @@
   <ImportGroup Label="Shared" />
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <SourcePath>D:\Andrew\Practice\!!!_5 RingExchange set\Old Folder\J-Q_model\2 MainConveyor\2 MainConveyor;D:\Andrew\Practice\!!!_5 RingExchange set\Old Folder\J-Q_model\SharedFiles;$(SourcePath)</SourcePath>
+    <IncludePath>D:\Andrew\Practice\!!!_5 RingExchange set\Old Folder\J-Q_model\SharedFiles;D:\Andrew\Practice\!!!_5 RingExchange set\Old Folder\J-Q_model\2 MainConveyor\2 MainConveyor;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h" />
+    <ClInclude Include="..\..\SharedFiles\configReader.h" />
+    <ClInclude Include="..\..\SharedFiles\Edge.h" />
+    <ClInclude Include="..\..\SharedFiles\ExtendedRoute.h" />
+    <ClInclude Include="..\..\SharedFiles\fileNamePrinter.h" />
+    <ClInclude Include="..\..\SharedFiles\globalConsts.h" />
+    <ClInclude Include="..\..\SharedFiles\LadderOperator.h" />
+    <ClInclude Include="..\..\SharedFiles\matrixNodes.h" />
+    <ClInclude Include="..\..\SharedFiles\NodeandDegree.h" />
+    <ClInclude Include="..\..\SharedFiles\Point.h" />
+    <ClInclude Include="..\..\SharedFiles\Route.h" />
+    <ClInclude Include="..\..\SharedFiles\RouteOperator.h" />
+    <ClInclude Include="..\..\SharedFiles\Term.h" />
+    <ClInclude Include="..\2 MainConveyor\Consts.h" />
+    <ClInclude Include="..\2 MainConveyor\JFactors.h" />
+    <ClInclude Include="..\2 MainConveyor\MatrixOfResults.h" />
+    <ClInclude Include="..\2 MainConveyor\MyFunctions.h" />
+    <ClInclude Include="..\2 MainConveyor\Operators.h" />
+    <ClInclude Include="..\2 MainConveyor\pairOperators.h" />
+    <ClInclude Include="..\2 MainConveyor\Results.h" />
+    <ClInclude Include="..\2 MainConveyor\State.h" />
+    <ClInclude Include="..\2 MainConveyor\targetver.h" />
+    <ClInclude Include="..\2 MainConveyor\waveFunction.h" />
+    <ClInclude Include="..\2 MainConveyor\WFTransformer.h" />
+    <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\SharedFiles\configReader.cpp" />
+    <ClCompile Include="..\..\SharedFiles\Edge.cpp" />
+    <ClCompile Include="..\..\SharedFiles\ExtendedRoute.cpp" />
+    <ClCompile Include="..\..\SharedFiles\fileNamePrinter.cpp" />
+    <ClCompile Include="..\..\SharedFiles\LadderOperator.cpp" />
+    <ClCompile Include="..\..\SharedFiles\matrixNodes.cpp" />
+    <ClCompile Include="..\..\SharedFiles\NodeandDegree.cpp" />
+    <ClCompile Include="..\..\SharedFiles\Point.cpp" />
+    <ClCompile Include="..\..\SharedFiles\Route.cpp" />
+    <ClCompile Include="..\..\SharedFiles\RouteOperator.cpp" />
+    <ClCompile Include="..\..\SharedFiles\Term.cpp" />
+    <ClCompile Include="..\2 MainConveyor\JFactors.cpp" />
+    <ClCompile Include="..\2 MainConveyor\MatrixOfResults.cpp" />
+    <ClCompile Include="..\2 MainConveyor\MyFunctions.cpp" />
+    <ClCompile Include="..\2 MainConveyor\Operators.cpp" />
+    <ClCompile Include="..\2 MainConveyor\pairOperators.cpp" />
+    <ClCompile Include="..\2 MainConveyor\Results.cpp" />
+    <ClCompile Include="..\2 MainConveyor\State.cpp" />
+    <ClCompile Include="..\2 MainConveyor\waveFunction.cpp" />
+    <ClCompile Include="..\2 MainConveyor\WFTransformer.cpp" />
     <ClCompile Include="test.cpp" />
-    <ClCompile Include="pch.cpp">
+    <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:\Andrew\Practice\!!!_5 RingExchange set\Old Folder\J-Q_model\SharedFiles;D:\Andrew\Practice\!!!_5 RingExchange set\Old Folder\J-Q_model\2 MainConveyor\2 MainConveyor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">D:\Andrew\Practice\!!!_5 RingExchange set\Old Folder\J-Q_model\SharedFiles;D:\Andrew\Practice\!!!_5 RingExchange set\Old Folder\J-Q_model\2 MainConveyor\2 MainConveyor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Andrew\Practice\!!!_5 RingExchange set\Old Folder\J-Q_model\SharedFiles;D:\Andrew\Practice\!!!_5 RingExchange set\Old Folder\J-Q_model\2 MainConveyor\2 MainConveyor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\Andrew\Practice\!!!_5 RingExchange set\Old Folder\J-Q_model\SharedFiles;D:\Andrew\Practice\!!!_5 RingExchange set\Old Folder\J-Q_model\2 MainConveyor\2 MainConveyor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -60,7 +111,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -75,7 +126,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>X64;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -90,7 +141,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
@@ -106,11 +157,12 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <PreprocessorDefinitions>X64;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalIncludeDirectories>D:\Andrew\Practice\!!!_5 RingExchange set\Old Folder\J-Q_model\SharedFiles;D:\Andrew\Practice\!!!_5 RingExchange set\Old Folder\J-Q_model\2 MainConveyor\2 MainConveyor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

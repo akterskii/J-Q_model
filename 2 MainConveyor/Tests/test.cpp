@@ -1,6 +1,9 @@
-#include "pch.h"
+#include "stdafx.h"
+#include "waveFunction.h"
+#include "State.h"
 
 TEST(TestCaseName, TestName) {
   EXPECT_EQ(1, 1);
   EXPECT_TRUE(true);
 }
+
