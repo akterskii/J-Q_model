@@ -40,6 +40,104 @@ int statesAmount(int nodesAmount)
 	//return 3 * (nodesAmount)*(int)pow((double)2, nodesAmount - 1)	
 }
 
+void eval_wavefuns_from_the_beggining(int realSize, 
+									  int order,
+									  int edgeNum,
+									  int nodeNum,
+									  WaveFunction wfIn[], 
+								      WaveFunction wfOut[],
+									  WFTransformer &mainTransformer,
+									  int procedureOrder[],
+									  int curOperatorSet[],
+									  int powerOrder[]) {
+	WaveFunction* ref1 = NULL, * ref2 = NULL;
+	WaveFunction wfTemp1, wfTemp2;
+	for (int ll = 0; ll < realSize; ll++)//вычисляем хвосты. начало
+	{
+		WaveFunction* ref1 = &wfIn[ll];
+		ref2 = &wfTemp1;
+		for (int mm = 0; mm < (order + 1) / 2; mm++)
+		{
+			if (mm == (order + 1) / 2 - 1)//если остался последний шаг
+				ref2 = &wfOut[ll];
+
+			if (procedureOrder[mm] <= 4)//выбираем процедуру
+				mainTransformer.actPairMatrix(*ref1, *ref2, curOperatorSet[mm], procedureOrder[mm], powerOrder[mm]);
+			else
+				mainTransformer.actPairInside(*ref1, *ref2, curOperatorSet[mm] - edgeNum, procedureOrder[mm], powerOrder[mm]);
+
+			if (ref2 == &wfTemp1)
+			{
+				ref2 = &wfTemp2;
+				ref1 = &wfTemp1;
+				wfTemp2.clear(nodeNum);
+			}
+			else if (ref2 == &wfTemp2)
+			{
+				ref2 = &wfTemp1;
+				ref1 = &wfTemp2;
+				wfTemp1.clear(nodeNum);
+			}
+		}
+	}
+}
+
+
+void eval_wavefuns_from_the_end(int realSize,
+								int order,
+								int edgeNum,
+								int nodeNum,
+								WaveFunction wfIn[],
+								WaveFunction wfOut[],
+								WFTransformer& mainTransformer,
+								int procedureOrder[],
+								int curOperatorSet[],
+								int powerOrder[]) {
+	WaveFunction* ref1 = NULL, * ref2 = NULL;
+	WaveFunction wfTemp1, wfTemp2;
+	for (int ll = 0; ll < realSize; ll++)
+	{
+		ref1 = &wfIn[ll];
+		ref2 = &wfTemp1;
+		//для случая первого порядка просто копируем
+		if (order == 1)
+		{
+			mainTransformer.actCopy(wfIn[ll], wfOut[ll]);
+		}
+		//для всех остальных порядков
+		for (int mm = order - 1; mm > order - 1 - order / 2; mm--)
+		{
+			if (mm == order - order / 2)//если остался последний шаг
+			{
+				ref2 = &wfOut[ll];
+			}
+
+			if (procedureOrder[mm] <= 4)
+			{
+				mainTransformer.actPairMatrix(*ref1, *ref2, curOperatorSet[mm], procedureOrder[mm], powerOrder[mm]);
+			}
+			else
+			{
+				mainTransformer.actPairInside(*ref1, *ref2, curOperatorSet[mm] - edgeNum, procedureOrder[mm], powerOrder[mm]);
+			}
+
+			if (ref2 == &wfTemp1)
+			{
+				ref2 = &wfTemp2;
+				ref1 = &wfTemp1;
+				wfTemp2.clear(nodeNum);
+			}
+			else
+				if (ref2 == &wfTemp2)
+				{
+					ref2 = &wfTemp1;
+					ref1 = &wfTemp2;
+					wfTemp1.clear(nodeNum);
+				}
+		}
+	}
+}
+
 
 int _main(int argc, char* argv[])
 {
@@ -287,83 +385,11 @@ int _main(int argc, char* argv[])
 
 						generate_procedure_order(nodeSets[k], curOperatorSet, edgeNum, order, procedureOrder, powerOrder);
 
-						for (int ll = 0; ll < realSize; ll++)//вычисляем хвосты. начало
-						{
-							ref1 = &wfIn[ll];
-							ref2 = &wfTemp1;
-							for (int mm = 0; mm < (order + 1) / 2; mm++)
-							{
-								if (mm == (order + 1) / 2 - 1)//если остался последний шаг
-									ref2 = &wfOut1[ll];
-								if (procedureOrder[mm] <= 4)//выбираем процедуру
-								{
-									mainTransformer.actPairMatrix(*ref1, *ref2, curOperatorSet[mm], procedureOrder[mm], powerOrder[mm]);
-								}
-								else
-								{
-									mainTransformer.actPairInside(*ref1, *ref2, curOperatorSet[mm] - edgeNum, procedureOrder[mm], powerOrder[mm]);
-								}
-
-								if (ref2 == &wfTemp1)
-								{
-									ref2 = &wfTemp2;
-									ref1 = &wfTemp1;
-									wfTemp2.clear(nodeNum);
-								}
-								else
-									if (ref2 == &wfTemp2)
-									{
-										ref2 = &wfTemp1;
-										ref1 = &wfTemp2;
-										wfTemp1.clear(nodeNum);
-									}
-							}
-						}
+						eval_wavefuns_from_the_beggining(realSize, order, edgeNum, nodeNum, wfIn, wfOut1, mainTransformer, procedureOrder, curOperatorSet, powerOrder);
 
 						///Вычисляем замыкающие хвосты
 
-						for (int ll = 0; ll < realSize; ll++)
-						{
-							ref1 = &wfIn[ll];
-							ref2 = &wfTemp1;
-							//для случая первого порядка просто копируем
-							if (order == 1)
-							{
-								mainTransformer.actCopy(wfIn[ll], wfOut2[ll]);
-							}
-							//для всех остальных порядков
-							for (int mm = order - 1; mm > order - 1 - order / 2; mm--)
-							{
-								if (mm == order - order / 2)//если остался последний шаг
-								{
-									ref2 = &wfOut2[ll];
-								}
-
-								if (procedureOrder[mm] <= 4)
-								{
-									mainTransformer.actPairMatrix(*ref1, *ref2, curOperatorSet[mm], procedureOrder[mm], powerOrder[mm]);
-								}
-								else
-								{
-									mainTransformer.actPairInside(*ref1, *ref2, curOperatorSet[mm] - edgeNum, procedureOrder[mm], powerOrder[mm]);
-								}
-
-								if (ref2 == &wfTemp1)
-								{
-									ref2 = &wfTemp2;
-									ref1 = &wfTemp1;
-									wfTemp2.clear(nodeNum);
-								}
-								else
-									if (ref2 == &wfTemp2)
-									{
-										ref2 = &wfTemp1;
-										ref1 = &wfTemp2;
-										wfTemp1.clear(nodeNum);
-									}
-							}
-						}
-
+						eval_wavefuns_from_the_end(realSize, order, edgeNum, nodeNum, wfIn, wfOut2, mainTransformer, procedureOrder, curOperatorSet, powerOrder);
 
 
 						for (int i = 0; i < realSize; i++)
